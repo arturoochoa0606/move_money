@@ -1,0 +1,35 @@
+package com.movemoney.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.movemoney.api.PaymentApi
+import com.movemoney.services.StripeService
+import kotlinx.coroutines.launch
+
+class PaymentViewModel(
+    private val stripeService: StripeService
+) : ViewModel() {
+
+    fun processPayment(amount: Long, cardNumber: String, expMonth: Int, expYear: Int, cvc: String) {
+        viewModelScope.launch {
+            try {
+                // 1. Pedir clientSecret al backend
+                val clientSecret = PaymentApi.createPaymentIntent(amount)
+
+                // 2. Crear PaymentMethod con Stripe
+                val paymentMethodParams = stripeService.createPaymentMethod(cardNumber, expMonth, expYear, cvc)
+
+                // 3. Confirmar el pago con Stripe
+                val success = stripeService.confirmPayment(clientSecret, paymentMethodParams)
+
+                if (success) {
+                    println("Pago confirmado correctamente")
+                } else {
+                    println("Error al confirmar el pago")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+}
