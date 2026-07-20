@@ -1,0 +1,13 @@
+
+## ⚙️ Configuración
+- Android Studio Giraffe o superior.
+- Kotlin 1.9.0.
+- Compose 1.5.0.
+- Room 2.6.1.
+- Stripe SDK 20.40.0 (ejemplo).
+- PayPal SDK 0.8.6 (ejemplo).
+
+## 🚀 Instalación
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tuusuario/MeveMoney.git
