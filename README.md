@@ -33,3 +33,19 @@ MeveMoney/
 
 
 Dinero digital, depositos y transferencias de todos los bancos y todos los paises
+# Meve Money
+
+Aplicación Android en Kotlin con Jetpack Compose y Room para gestionar tarjetas, fondos internos y transferencias.  
+Proyecto educativo con integración simulada de pasarelas de pago (Stripe/PayPal).
+
+## ✨ Funcionalidades
+- Agregar tarjetas de cualquier banco.
+- Recargar fondos internos desde tarjetas añadidas.
+- Transferir fondos internos hacia tarjetas añadidas.
+- Realizar transferencias externas a otras cuentas.
+- Persistencia con Room.
+- UI modular con Jetpack Compose.
+- Servicios de pago simulados (listos para reemplazar por Stripe/PayPal SDK).
+- ViewModel para manejar estado y lógica.
+
+## 📂 Estructura
