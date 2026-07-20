@@ -1,0 +1,27 @@
+fun runEndToEndTest() {
+    viewModelScope.launch {
+        try {
+            // 1. Pedir clientSecret al backend con monto fijo (ej. $10 USD = 1000 centavos)
+            val clientSecret = PaymentApi.createPaymentIntent(amount = 1000)
+
+            // 2. Crear PaymentMethod con tarjeta de prueba
+            val paymentMethodParams = stripeService.createPaymentMethod(
+                cardNumber = "4242424242424242",
+                expMonth = 12,
+                expYear = 34,
+                cvc = "123"
+            )
+
+            // 3. Confirmar el pago con Stripe
+            val success = stripeService.confirmPayment(clientSecret, paymentMethodParams)
+
+            if (success) {
+                println("✅ Pago de prueba confirmado correctamente")
+            } else {
+                println("❌ Error al confirmar el pago")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+}
